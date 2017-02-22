@@ -13,13 +13,13 @@ func getFaceMVCinstanceCount() -> Int { faceMVCinstanceCount += 1; return faceMV
 private var emotionsMVCinstanceCount = 0
 func getEmotionsMVCinstanceCount() -> Int { emotionsMVCinstanceCount += 1; return emotionsMVCinstanceCount }
 
-var lastLog = NSDate()
+var lastLog = Date()
 var logPrefix = ""
 
 func bumpLogDepth() {
     if lastLog.timeIntervalSinceNow < -1.0 {
         logPrefix += "__"
-        lastLog = NSDate()
+        lastLog = Date()
     }
 }
 
@@ -28,7 +28,7 @@ func bumpLogDepth() {
 
 extension FaceViewController
 {
-    func logVCL(msg: String) {
+    func logVCL(_ msg: String) {
         bumpLogDepth()
         print("\(logPrefix)Face \(instance) " + msg)
     }
@@ -41,19 +41,19 @@ extension FaceViewController
         super.viewDidLoad()
         logVCL("viewDidLoad()")
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logVCL("viewWillAppear(animated = \(animated))")
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         logVCL("viewDidAppear(animated = \(animated))")
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         logVCL("viewWillDisappear(animated = \(animated))")
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         logVCL("viewDidDisappear(animated = \(animated))")
     }
@@ -67,10 +67,10 @@ extension FaceViewController
         logVCL("viewDidLayoutSubviews() bounds.size = \(view.bounds.size)")
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         logVCL("viewWillTransitionToSize")
-        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+        coordinator.animate(alongsideTransition: { (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.logVCL("animatingAlongsideTransition")
             }, completion: { context -> Void in
                 self.logVCL("doneAnimatingAlongsideTransition")
@@ -80,7 +80,7 @@ extension FaceViewController
 
 extension EmotionsViewController
 {
-    func logVCL(msg: String) {
+    func logVCL(_ msg: String) {
         bumpLogDepth()
         print("\(logPrefix)Emotions \(instance) " + msg)
     }
@@ -93,19 +93,19 @@ extension EmotionsViewController
         super.viewDidLoad()
         logVCL("viewDidLoad()")
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logVCL("viewWillAppear(animated = \(animated))")
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         logVCL("viewDidAppear(animated = \(animated))")
     }
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         logVCL("viewWillDisappear(animated = \(animated))")
     }
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         logVCL("viewDidDisappear(animated = \(animated))")
     }
@@ -119,10 +119,10 @@ extension EmotionsViewController
         logVCL("viewDidLayoutSubviews() bounds.size = \(view.bounds.size)")
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         logVCL("viewWillTransitionToSize")
-        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+        coordinator.animate(alongsideTransition: { (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.logVCL("animatingAlongsideTransition")
             }, completion: { context -> Void in
                 self.logVCL("doneAnimatingAlongsideTransition")

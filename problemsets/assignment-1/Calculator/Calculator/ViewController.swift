@@ -10,13 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet private weak var display: UILabel!
-    @IBOutlet private weak var calculationTape: UILabel!
+    @IBOutlet fileprivate weak var display: UILabel!
+    @IBOutlet fileprivate weak var calculationTape: UILabel!
     
-    private var userIsInTheMiddleOfTyping = false
-    private var decimalUsed = false
+    fileprivate var userIsInTheMiddleOfTyping = false
+    fileprivate var decimalUsed = false
 
-    @IBAction private func touchDigit(sender: UIButton) {
+    @IBAction fileprivate func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle!
         
         if userIsInTheMiddleOfTyping {
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }
     
     // computed property is calculated when getting and setting
-    private var displayValue: Double {
+    fileprivate var displayValue: Double {
         get {
             return Double(display.text!)!
         }
@@ -47,9 +47,9 @@ class ViewController: UIViewController {
         }
     }
 
-    private var brain = CalculatorBrain()
+    fileprivate var brain = CalculatorBrain()
     
-    @IBAction private func performOperation(sender: UIButton) {
+    @IBAction fileprivate func performOperation(_ sender: UIButton) {
         if userIsInTheMiddleOfTyping {
             brain.setOperand(displayValue)
             userIsInTheMiddleOfTyping = false
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         displayValue = brain.result
     }
     
-    @IBAction func clear(sender: AnyObject) {
+    @IBAction func clear(_ sender: AnyObject) {
         userIsInTheMiddleOfTyping = false
         decimalUsed = false
         brain.clear()
